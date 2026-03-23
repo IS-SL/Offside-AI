@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── OFFSIDE AI — Dark Football Pitch Theme ─── */
+/* Concept: deep pitch-side night. Grass-black surfaces, electric cyan accent, sharp sans-serif. */
+
+:root {
+  --button-outline: rgba(255,255,255, .08);
+  --badge-outline: rgba(255,255,255, .05);
+  --opaque-button-border-intensity: 6;
+  --elevate-1: rgba(255,255,255, .03);
+  --elevate-2: rgba(255,255,255, .06);
+
+  /* Dark pitch surfaces */
+  --background: 155 30% 5%;
+  --foreground: 155 5% 92%;
+  --border: 155 15% 14%;
+  --card: 155 25% 7%;
+  --card-foreground: 155 5% 92%;
+  --card-border: 155 15% 12%;
+  --sidebar: 155 28% 6%;
+  --sidebar-foreground: 155 5% 88%;
+  --sidebar-border: 155 15% 11%;
+  --sidebar-primary: 183 90% 42%;
+  --sidebar-primary-foreground: 155 30% 5%;
+  --sidebar-accent: 155 15% 11%;
+  --sidebar-accent-foreground: 155 5% 88%;
+  --sidebar-ring: 183 90% 42%;
+  --popover: 155 25% 8%;
+  --popover-foreground: 155 5% 92%;
+  --popover-border: 155 15% 14%;
+
+  /* Electric cyan primary (pitch markings) */
+  --primary: 183 90% 42%;
+  --primary-foreground: 155 30% 5%;
+  --secondary: 155 15% 12%;
+  --secondary-foreground: 155 5% 88%;
+  --muted: 155 15% 10%;
+  --muted-foreground: 155 5% 55%;
+  --accent: 155 20% 13%;
+  --accent-foreground: 155 5% 88%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+  --input: 155 15% 18%;
+  --ring: 183 90% 42%;
+  --chart-1: 183 90% 42%;
+  --chart-2: 142 71% 45%;
+  --chart-3: 39 92% 55%;
+  --chart-4: 0 72% 51%;
+  --chart-5: 270 65% 60%;
+  --font-sans: 'Cabinet Grotesk', 'Inter', sans-serif;
+  --font-serif: Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --radius: .5rem;
+  --shadow-2xs: 0 1px 3px hsl(155 30% 3% / 0.4);
+  --shadow-xs: 0 2px 4px hsl(155 30% 3% / 0.5);
+  --shadow-sm: 0 2px 8px hsl(155 30% 3% / 0.6);
+  --shadow: 0 4px 16px hsl(155 30% 3% / 0.6);
+  --shadow-md: 0 6px 24px hsl(155 30% 3% / 0.7);
+  --shadow-lg: 0 12px 40px hsl(155 30% 3% / 0.8);
+  --shadow-xl: 0 20px 60px hsl(155 30% 3% / 0.9);
+  --shadow-2xl: 0 32px 80px hsl(155 30% 3% / 1);
+  --tracking-normal: 0em;
+  --spacing: 0.25rem;
+
+  /* Fallback borders */
+  --sidebar-primary-border: hsl(var(--sidebar-primary));
+  --sidebar-primary-border: hsl(from hsl(var(--sidebar-primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --sidebar-accent-border: hsl(var(--sidebar-accent));
+  --sidebar-accent-border: hsl(from hsl(var(--sidebar-accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --primary-border: hsl(var(--primary));
+  --primary-border: hsl(from hsl(var(--primary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --secondary-border: hsl(var(--secondary));
+  --secondary-border: hsl(from hsl(var(--secondary)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --muted-border: hsl(var(--muted));
+  --muted-border: hsl(from hsl(var(--muted)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+  --accent-border: hsl(var(--accent));
+  --accent-border: hsl(from hsl(var(--accent)) h s calc(l + var(--opaque-button-border-intensity)) / alpha);
+}
+
+/* We keep only dark mode — this is a night-sport app */
+.dark {
+  --background: 155 30% 5%;
+  --foreground: 155 5% 92%;
+  --border: 155 15% 14%;
+  --card: 155 25% 7%;
+  --card-foreground: 155 5% 92%;
+  --card-border: 155 15% 12%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* ─── Custom Pitch Pitch Pattern ─── */
+body {
+  background-image:
+    linear-gradient(
+      to bottom,
+      hsl(155 30% 4%) 0%,
+      hsl(155 28% 5%) 50%,
+      hsl(155 30% 4%) 100%
+    );
+  min-height: 100dvh;
+}
+
+/* ─── Verdict Badge Animations ─── */
+@keyframes verdict-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 currentColor; }
+  50% { box-shadow: 0 0 0 8px transparent; }
+}
+
+@keyframes scan-line {
+  0% { transform: translateY(-100%); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(600px); opacity: 0; }
+}
+
+@keyframes line-draw {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes pitch-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+.animate-fade-up { animation: fade-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+.animate-shimmer {
+  background: linear-gradient(90deg, hsl(155 25% 10%) 25%, hsl(155 20% 14%) 50%, hsl(155 25% 10%) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+
+/* ─── Upload Drop Zone ─── */
+.drop-zone {
+  border: 2px dashed hsl(var(--border));
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.drop-zone.drag-over {
+  border-color: hsl(var(--primary));
+  background-color: hsl(var(--primary) / 0.06);
+}
+
+/* ─── Processing Steps ─── */
+.step-line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: line-draw 0.8s ease-out forwards;
+}
+
+/* ─── Three.js Canvas ─── */
+.threejs-canvas {
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* ─── Verdict Colors ─── */
+.verdict-OFFSIDE { --verdict-color: hsl(0 72% 51%); --verdict-bg: hsl(0 72% 51% / 0.1); }
+.verdict-ONSIDE { --verdict-color: hsl(142 71% 45%); --verdict-bg: hsl(142 71% 45% / 0.1); }
+.verdict-UNCERTAIN { --verdict-color: hsl(39 92% 55%); --verdict-bg: hsl(39 92% 55% / 0.1); }
+
+/* ─── Share Button Hover ─── */
+.share-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px hsl(var(--primary) / 0.3);
+}
+.share-btn { transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1); }
